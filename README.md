@@ -12,3 +12,16 @@ PARTICULAR PURPOSE. See the GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along with
 this program. If not, see http://www.gnu.org/licenses/.
 
+############################################################################
+
+# weatherstation
+This is a the arduino weatherstation without its own webserver.
+
+# weatherstation-mega
+Arduino Weatherstation with own webserver and SD-Card support.
+
+# Dokumentation.pdf
+Final Documentation of the project in German.
+
+# arduino.pl
+Perl cgi-file for webserver support
