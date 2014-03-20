@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 #
-# Copyright (c) 2012 Max Oberberger (max@oberbergers.de)
+# Copyright (c) 2012-2014 Max Oberberger (max@oberbergers.de)
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -36,15 +36,29 @@ use Log::Dispatch::File;
 my ($home) = glob "~";
 my $dbFolder = "$home/arduino/databases";
 my $arduinoFolder = "$home/arduino";
+my $dbFolder = "$arduinoFolder/databases";
 my $logfile = "/var/log/arduino/Wetterstation.log";
 ### Database
-my $dbSimple = "$home/arduino/databases/weatherstationSimple.rrd";
-my $rrdSimple = "";
+my $dbSimpleTemp = "$dbFolder/weatherstationSimpleTemp.rrd";
+my $dbSimpleHumid = "$dbFolder/weatherstationSimpleHumid.rrd";
+my $dbSimplePressure = "$dbFolder/weatherstationSimplePressure.rrd";
+my $dbSimpleWind = "$dbFolder/weatherstationSimpleWind.rrd";
+my $dbSimpleWindDirection = "$dbFolder/weatherstationSimpleWindDirection.rrd";
+my $dbSimpleRain = "$dbFolder/weatherstationSimpleRain.rrd";
+my $rrdSimpleWind = "";
+my $rrdSimpleWindDirection = "";
+my $rrdSimpleTemp = "";
+my $rrdSimplePressure = "";
+my $rrdSimpleHumid = "";
+my $rrdSimpleRain = "";
 
 ### Sensoren
 my $temperature;
 my $pressure;
 my $humidity;
+my $windspeed;
+my $winddirection;
+my $rain;
 
 ########## Time - maybe complicated but it works ;)
 ## to show a temp and pressure graph of 24 hours
@@ -108,6 +122,15 @@ sub extractSensorValues {
 		}elsif ( $name eq "H" ){ # Humidity
 			$humidity = $value;
 			print LOG "++ got humidity value from arduino: $value\n";
+		}elsif ( $name eq "W" ){ # Windspeed 
+			$windspeed = $value;
+			print LOG "++ got windspeed value from arduino: $value\n";
+		}elsif ( $name eq "D" ){ # Winddirection 
+			$winddirection = $value;
+			print LOG "++ got winddirection value from arduino: $value\n";
+		}elsif ( $name eq "R" ){ # Rain 
+			$rain = $value;
+			print LOG "++ got rain value from arduino: $value\n";
 		}
 		if(!defined($name)){
 			print LOG "-- error with webcall of arduino.pl. Nothing contains T,H,P\n";
@@ -119,31 +142,112 @@ sub extractSensorValues {
 }
 
 sub updateRRDdatabase {
-	$rrdSimple->update(
-		temperature => $temperature,
-		pressure => $pressure,
-		humidity => $humidity
+    $rrdSimpleTemp->update(
+        temperature => $temperature
+        );
+    $rrdSimplePressure->update(
+        pressure => $pressure
+        );
+    $rrdSimpleHumid->update(
+        humidity => $humidity
+        );
+	$rrdSimpleWind->update(
+		speed => $windspeed
+		);
+	$rrdSimpleWindDirection->update(
+		winddirection => $winddirection
+		);
+	$rrdSimpleRain->update(
+		rain => $rain
 		);
 }
 
 sub graphRRDdata {
-	my %rtn = $rrdSimple->graph(
-		destination => "$home/temp",
+	my %rtn = $rrdSimpleTemp->graph(
+		destination => "$arduinoFolder/data",
 		title => "Wetterstation",
 		width => "500",
 		height => "200",
-		vertical_label => "Temperatur/Druck/Humidity",
+		vertical_label => "Temperatur (Celsius)",
+		interlaced => ""
+		);
+	%rtn = $rrdSimplePressure->graph(
+		destination => "$arduinoFolder/data",
+		title => "Wetterstation",
+		width => "500",
+		height => "200",
+		vertical_label => "Luftdruck (hPa)",
+		interlaced => ""
+		);
+	%rtn = $rrdSimpleHumid->graph(
+		destination => "$arduinoFolder/data",
+		title => "Wetterstation",
+		width => "500",
+		height => "200",
+		vertical_label => "Luftfeuchtigkeit (%)",
+		interlaced => ""
+		);
+	%rtn = $rrdSimpleWind->graph(
+		destination => "$arduinoFolder/data",
+		title => "Wetterstation",
+		width => "500",
+		height => "200",
+		vertical_label => "Windgeschwindigkeit",
+		interlaced => ""
+		);
+	%rtn = $rrdSimpleWindDirection->graph(
+		destination => "$arduinoFolder/data",
+		title => "Wetterstation",
+		width => "500",
+		height => "200",
+		vertical_label => "Windrichtung",
+		interlaced => ""
+		);
+	%rtn = $rrdSimpleRain->graph(
+		destination => "$arduinoFolder/data",
+		title => "Wetterstation",
+		width => "500",
+		height => "200",
+		vertical_label => "Niederschlag",
 		interlaced => ""
 		);
 }
 
 sub createRRDdatabase {
-	$rrdSimple = RRD::Simple->new( file => $dbSimple );
-	if(! -f $dbSimple){
-		$rrdSimple->create(
+	$rrdSimpleTemp = RRD::Simple->new( file => $dbSimpleTemp );
+	if(! -f $dbSimpleTemp){
+		$rrdSimpleTemp->create(
 			temperature => "GAUGE",
+		);
+	}
+	$rrdSimpleHumid = RRD::Simple->new( file => $dbSimpleHumid );
+	if(! -f $dbSimpleHumid){
+		$rrdSimpleHumid->create(
+			humidity => "GAUGE",
+		);
+	}
+	$rrdSimplePressure = RRD::Simple->new( file => $dbSimplePressure );
+	if(! -f $dbSimplePressure){
+		$rrdSimplePressure->create(
 			pressure => "GAUGE",
-			humidity => "GAUGE"
+		);
+	}
+	$rrdSimpleWind = RRD::Simple->new( file => $dbSimpleWind );
+	if(! -f $dbSimpleWind){
+		$rrdSimpleWind->create(
+			speed => "GAUGE",
+		);
+	}
+	$rrdSimpleWindDirection = RRD::Simple->new( file => $dbSimpleWindDirection );
+	if(! -f $dbSimpleWindDirection){
+		$rrdSimpleWindDirection->create(
+			winddirection => "GAUGE",
+		);
+	}
+	$rrdSimpleRain = RRD::Simple->new( file => $dbSimpleRain );
+	if(! -f $dbSimpleRain){
+		$rrdSimpleRain->create(
+			rain => "GAUGE",
 		);
 	}
 }
