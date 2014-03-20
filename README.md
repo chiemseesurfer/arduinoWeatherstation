@@ -1,4 +1,4 @@
-Copyright &copy; 2012-2013 Max Oberberger, Alexander Zenger
+Copyright &copy; 2012-2014 Max Oberberger, Alexander Zenger
 
 This program is free software: you can redistribute it and/or modify it under
 the terms of the GNU General Public License as published by the Free Software
@@ -17,11 +17,26 @@ this program. If not, see http://www.gnu.org/licenses/.
 # weatherstation
 This is a the arduino weatherstation without its own webserver.
 
+Supported sensors:
+ * Temperature
+ * Humidity
+ * Pressure
+ * Windspeed
+ * Winddirection
+ * rainfall
+
 # weatherstation-mega
 Arduino Weatherstation with own webserver and SD-Card support.
+
+Supported sensors:
+ * Temperature
+ * Humidity
+ * Pressure
 
 # Dokumentation.pdf
 Final Documentation of the project in German.
 
 # arduino.pl
-Perl cgi-file for webserver support
+Perl cgi-file for webserver support.
+ * Called from arduino with a HTTP-POST Request.
+ * Saves all sensor values in seperate rrd-simple databases
