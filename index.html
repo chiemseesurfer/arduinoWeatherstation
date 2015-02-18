@@ -4,72 +4,33 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>Arduinoweatherstation by chiemseesurfer</title>
+
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="javascripts/respond.js"></script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <!--[if lt IE 8]>
-    <link rel="stylesheet" href="stylesheets/ie.css">
-    <![endif]-->
+    <script src="javascripts/scale.fix.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
   </head>
   <body>
-      <div id="header">
-        <nav>
-          <li class="fork"><a href="https://github.com/chiemseesurfer/arduinoWeatherstation">View On GitHub</a></li>
-          <li class="downloads"><a href="https://github.com/chiemseesurfer/arduinoWeatherstation/zipball/master">ZIP</a></li>
-          <li class="downloads"><a href="https://github.com/chiemseesurfer/arduinoWeatherstation/tarball/master">TAR</a></li>
-          <li class="title">DOWNLOADS</li>
-        </nav>
-      </div><!-- end header -->
-
     <div class="wrapper">
+      <header>
+        <h1 class="header">Arduinoweatherstation</h1>
+        <p class="header">weather station based on arduino. Developed on Uno and Mega.</p>
 
+        <ul>
+          <li class="download"><a class="buttons" href="https://github.com/chiemseesurfer/arduinoWeatherstation/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/chiemseesurfer/arduinoWeatherstation/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/chiemseesurfer/arduinoWeatherstation">View On GitHub</a></li>
+        </ul>
+
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/chiemseesurfer">chiemseesurfer</a></p>
+
+
+      </header>
       <section>
-        <div id="title">
-          <h1>Arduinoweatherstation</h1>
-          <p>weather station based on arduino. Developed on Uno and Mega.</p>
-          <hr>
-          <span class="credits left">Project maintained by <a href="https://github.com/chiemseesurfer">chiemseesurfer</a></span>
-          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
-        </div>
-
-        <p>This is an arduino weatherstation without its own webserver.
-I use a Arduino Uno. The Arduino Uno is a microcontroller board based on the ATmega328.</p>
-
-<p><img src="http://maxoberberger.net/media/images/projects/arduino-weatherstation/ArduinoUno.jpg" alt="uno"></p>
-
-<p>Supported sensors:</p>
-
-<ul>
-<li>Temperature</li>
-<li>Pressure</li>
-</ul>
-
-<p><img src="http://maxoberberger.net/media/images/projects/arduino-weatherstation/bmp085.jpg" alt="temperature/pressure"></p>
-
-<ul>
-<li>Humidity</li>
-</ul>
-
-<p><img src="http://maxoberberger.net/media/images/projects/arduino-weatherstation/hih4030.jpg" alt="humidity"></p>
-
-<ul>
-<li>Windspeed</li>
-<li>Winddirection</li>
-<li>rainfall</li>
-</ul>
-
-<p><img src="http://maxoberberger.net/media/images//projects/arduino-weatherstation/sensor.png" alt="windsensor"></p>
-
-<h1>
-<a id="copyright" class="anchor" href="#copyright" aria-hidden="true"><span class="octicon octicon-link"></span></a>Copyright</h1>
-
-<p>Copyright © 2012-2014 Max Oberberger, Alexander Zenger</p>
+        <p>Copyright © 2012-2014 Max Oberberger, Alexander Zenger</p>
 
 <p>This program is free software: you can redistribute it and/or modify it under
 the terms of the GNU General Public License as published by the Free Software
@@ -82,10 +43,58 @@ PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
 
 <p>You should have received a copy of the GNU General Public License along with
 this program. If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>
-      </section>
 
+<hr>
+
+<h1>
+<a id="weatherstation" class="anchor" href="#weatherstation" aria-hidden="true"><span class="octicon octicon-link"></span></a>weatherstation</h1>
+
+<p>This is a the arduino weatherstation without its own webserver.</p>
+
+<p>Supported sensors:</p>
+
+<ul>
+<li>Temperature</li>
+<li>Humidity</li>
+<li>Pressure</li>
+<li>Windspeed</li>
+<li>Winddirection</li>
+<li>rainfall</li>
+</ul>
+
+<h1>
+<a id="weatherstation-mega" class="anchor" href="#weatherstation-mega" aria-hidden="true"><span class="octicon octicon-link"></span></a>weatherstation-mega</h1>
+
+<p>Arduino Weatherstation with own webserver and SD-Card support.</p>
+
+<p>Supported sensors:</p>
+
+<ul>
+<li>Temperature</li>
+<li>Humidity</li>
+<li>Pressure</li>
+</ul>
+
+<h1>
+<a id="dokumentationpdf" class="anchor" href="#dokumentationpdf" aria-hidden="true"><span class="octicon octicon-link"></span></a>Dokumentation.pdf</h1>
+
+<p>Final Documentation of the project in German.</p>
+
+<h1>
+<a id="arduinopl" class="anchor" href="#arduinopl" aria-hidden="true"><span class="octicon octicon-link"></span></a>arduino.pl</h1>
+
+<p>Perl cgi-file for webserver support.</p>
+
+<ul>
+<li>Called from arduino with a HTTP-POST Request.</li>
+<li>Saves all sensor values in seperate rrd-simple databases</li>
+</ul>
+      </section>
+      <footer>
+        <p><small>Hosted on <a href="http://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+      </footer>
     </div>
     <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-    
+		
   </body>
 </html>
