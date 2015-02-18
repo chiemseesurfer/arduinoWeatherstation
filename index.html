@@ -38,22 +38,25 @@
           <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
         </div>
 
-        <p>This is a the arduino weatherstation without its own webserver.</p>
+        <p>This is an arduino weatherstation without its own webserver.
+I use a Arduino Uno. The Arduino Uno is a microcontroller board based on the ATmega328.</p>
+
+<p><img src="http://maxoberberger.net/media/images/projects/arduino-weatherstation/ArduinoUno.jpg" alt="uno"></p>
 
 <p>Supported sensors:</p>
 
 <ul>
 <li>Temperature</li>
-<li>Humidity</li>
-<li>Pressure</li>
-<li>Windspeed</li>
+<li><p>Pressure
+<img src="http://maxoberberger.net/media/images/projects/arduino-weatherstation/bmp085.jpg" alt="temperature/pressure"></p></li>
+<li><p>Humidity
+<img src="http://maxoberberger.net/media/images/projects/arduino-weatherstation/hih4030.jpg" alt="humidity"></p></li>
+<li><p>Windspeed</p></li>
 <li>Winddirection</li>
-<li>rainfall</li>
+<li>rainfall
+<img src="http://maxoberberger.net/media/images//projects/arduino-weatherstation/sensor.png" alt="windsensor">
+</li>
 </ul>
-
-<p><img src="http://maxoberberger.net/media/images/projects/arduino-weatherstation/ArduinoUno.jpg" alt="uno"></p>
-
-<p><img src="http://maxoberberger.net/media/images//projects/arduino-weatherstation/sensor.png" alt="windsensor"></p>
 
 <h1>
 <a id="copyright" class="anchor" href="#copyright" aria-hidden="true"><span class="octicon octicon-link"></span></a>Copyright</h1>
@@ -71,36 +74,6 @@ PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
 
 <p>You should have received a copy of the GNU General Public License along with
 this program. If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>
-
-<hr>
-
-<h1>
-<a id="weatherstation-mega" class="anchor" href="#weatherstation-mega" aria-hidden="true"><span class="octicon octicon-link"></span></a>weatherstation-mega</h1>
-
-<p>Arduino Weatherstation with own webserver and SD-Card support.</p>
-
-<p>Supported sensors:</p>
-
-<ul>
-<li>Temperature</li>
-<li>Humidity</li>
-<li>Pressure</li>
-</ul>
-
-<h1>
-<a id="dokumentationpdf" class="anchor" href="#dokumentationpdf" aria-hidden="true"><span class="octicon octicon-link"></span></a>Dokumentation.pdf</h1>
-
-<p>Final Documentation of the project in German.</p>
-
-<h1>
-<a id="arduinopl" class="anchor" href="#arduinopl" aria-hidden="true"><span class="octicon octicon-link"></span></a>arduino.pl</h1>
-
-<p>Perl cgi-file for webserver support.</p>
-
-<ul>
-<li>Called from arduino with a HTTP-POST Request.</li>
-<li>Saves all sensor values in seperate rrd-simple databases</li>
-</ul>
       </section>
 
     </div>
