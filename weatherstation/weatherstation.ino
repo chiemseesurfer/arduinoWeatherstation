@@ -225,5 +225,5 @@ void loop()
   	}
   	timer = timer +1;
   
-    delay(4);
+    delay(5);
 }
